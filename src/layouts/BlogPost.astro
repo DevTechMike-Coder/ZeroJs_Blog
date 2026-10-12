@@ -5,6 +5,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import LightningIcon from '../components/icons/LightningIcon.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
@@ -63,7 +64,9 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 				<footer class="post-footer glass-card">
 					<div class="author-box">
-						<div class="author-avatar">⚡</div>
+						<div class="author-avatar">
+							<LightningIcon size={26} />
+						</div>
 						<div class="author-info">
 							<h4>ZeroJS Journal</h4>
 							<p>Dedicated to exploring high-performance web architecture, zero-bloat engineering, and modern standards.</p>

@@ -5,6 +5,9 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import LightningIcon from '../components/icons/LightningIcon.astro';
+import LockIcon from '../components/icons/LockIcon.astro';
+import SparklesIcon from '../components/icons/SparklesIcon.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 const posts = (await getCollection('blog'))
@@ -117,21 +120,27 @@ const posts = (await getCollection('blog'))
 
 				<div class="principles-grid">
 					<div class="principle-card glass-card">
-						<div class="principle-icon">⚡</div>
+						<div class="principle-icon">
+							<LightningIcon size={26} />
+						</div>
 						<h3>Static-First Architecture</h3>
 						<p>
 							Content that doesn't need dynamic client-side state shouldn't demand client-side JavaScript execution. Pages render instantaneously and work reliably everywhere.
 						</p>
 					</div>
 					<div class="principle-card glass-card">
-						<div class="principle-icon">🔒</div>
+						<div class="principle-icon">
+							<LockIcon size={26} />
+						</div>
 						<h3>Privacy & Minimal Footprint</h3>
 						<p>
 							Respecting readers means eliminating surveillance trackers, invasive analytics scripts, and massive asset downloads that drain batteries and data caps.
 						</p>
 					</div>
 					<div class="principle-card glass-card">
-						<div class="principle-icon">✨</div>
+						<div class="principle-icon">
+							<SparklesIcon size={26} />
+						</div>
 						<h3>Modern Craft & Aesthetics</h3>
 						<p>
 							Zero JavaScript doesn't mean boring or utilitarian. Through modern CSS, fluid layouts, and typographic discipline, we deliver stunning visual design effortlessly.
@@ -157,7 +166,7 @@ const posts = (await getCollection('blog'))
 							</svg>
 							<span>Open RSS Feed</span>
 						</a>
-						<a href="https://github.com/withastro/astro" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+						<a href="https://github.com/DevTechMike-Coder/ZeroJs_Blog" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
 							<span>Star on GitHub</span>
 						</a>
 					</div>

@@ -1,0 +1,145 @@
+---
+interface Props {
+	size?: number;
+	class?: string;
+}
+
+const { size = 24, class: className = '' } = Astro.props;
+---
+
+<span class:list={['icon-wrapper sparkles-icon-wrap', className]} style={`--icon-size: ${size}px;`}>
+	<svg
+		viewBox="0 0 24 24"
+		width={size}
+		height={size}
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+		class="sparkles-svg"
+		aria-hidden="true"
+	>
+		<defs>
+			<linearGradient id="sparkleGrad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+				<stop offset="0%" stop-color="#f472b6" />
+				<stop offset="50%" stop-color="#c084fc" />
+				<stop offset="100%" stop-color="#38bdf8" />
+			</linearGradient>
+			<filter id="sparkleGlow" x="-30%" y="-30%" width="160%" height="160%">
+				<feGaussianBlur stdDeviation="1.5" result="blur" />
+				<feComposite in="SourceGraphic" in2="blur" operator="over" />
+			</filter>
+		</defs>
+
+		<!-- Main Center Sparkle -->
+		<path
+			d="M12 2C12 7.52285 7.52285 12 2 12C7.52285 12 12 16.4771 12 22C12 16.4771 16.4771 12 22 12C16.4771 12 12 7.52285 12 2Z"
+			fill="url(#sparkleGrad)"
+			filter="url(#sparkleGlow)"
+			class="sparkle-main"
+		/>
+
+		<!-- Top-Right Mini Sparkle -->
+		<path
+			d="M19 1C19 3.2 17.2 5 15 5C17.2 5 19 6.8 19 9C19 6.8 20.8 5 23 5C20.8 5 19 3.2 19 1Z"
+			fill="#f472b6"
+			class="sparkle-mini-1"
+		/>
+
+		<!-- Bottom-Left Mini Sparkle -->
+		<path
+			d="M5 16C5 17.65 3.65 19 2 19C3.65 19 5 20.35 5 22C5 20.35 6.35 19 8 19C6.35 19 5 17.65 5 16Z"
+			fill="#38bdf8"
+			class="sparkle-mini-2"
+		/>
+	</svg>
+</span>
+
+<style>
+	.icon-wrapper {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: var(--icon-size);
+		height: var(--icon-size);
+		line-height: 0;
+	}
+
+	.sparkles-svg {
+		overflow: visible;
+		display: block;
+	}
+
+	.sparkle-main {
+		transform-origin: 12px 12px;
+		animation: sparkle-pulse 3.6s ease-in-out infinite;
+		will-change: transform, opacity;
+	}
+
+	.sparkle-mini-1 {
+		transform-origin: 19px 5px;
+		animation: twinkle-one 2.8s ease-in-out infinite;
+	}
+
+	.sparkle-mini-2 {
+		transform-origin: 5px 19px;
+		animation: twinkle-two 3.2s ease-in-out infinite;
+	}
+
+	.sparkles-icon-wrap:hover .sparkle-main {
+		animation: sparkle-spin 0.7s ease-out;
+	}
+
+	@keyframes sparkle-pulse {
+		0%, 100% {
+			transform: scale(0.96) rotate(0deg);
+			opacity: 0.9;
+			filter: drop-shadow(0 0 2px rgba(192, 132, 252, 0.4));
+		}
+		50% {
+			transform: scale(1.08) rotate(3deg);
+			opacity: 1;
+			filter: drop-shadow(0 0 8px rgba(192, 132, 252, 0.85));
+		}
+	}
+
+	@keyframes twinkle-one {
+		0%, 100% {
+			transform: scale(0.7);
+			opacity: 0.4;
+		}
+		50% {
+			transform: scale(1.15);
+			opacity: 1;
+		}
+	}
+
+	@keyframes twinkle-two {
+		0%, 100% {
+			transform: scale(1.1);
+			opacity: 1;
+		}
+		50% {
+			transform: scale(0.6);
+			opacity: 0.35;
+		}
+	}
+
+	@keyframes sparkle-spin {
+		0% {
+			transform: scale(1) rotate(0deg);
+		}
+		50% {
+			transform: scale(1.22) rotate(45deg);
+		}
+		100% {
+			transform: scale(1) rotate(0deg);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.sparkle-main,
+		.sparkle-mini-1,
+		.sparkle-mini-2 {
+			animation: none;
+		}
+	}
+</style>

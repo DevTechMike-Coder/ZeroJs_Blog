@@ -1,5 +1,6 @@
 ---
 import { SITE_TITLE } from '../consts';
+import LightningIcon from './icons/LightningIcon.astro';
 
 const today = new Date();
 ---
@@ -9,7 +10,9 @@ const today = new Date();
 		<div class="footer-top">
 			<div class="footer-brand">
 				<a href="/" class="brand-link">
-					<span class="brand-icon">⚡</span>
+					<span class="brand-icon">
+						<LightningIcon size={18} />
+					</span>
 					<span class="brand-text">{SITE_TITLE}</span>
 				</a>
 				<p class="brand-tagline">
@@ -30,7 +33,7 @@ const today = new Date();
 				<div class="footer-col">
 					<h4>Connect</h4>
 					<ul>
-						<li><a href="https://github.com/withastro/astro" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+						<li><a href="https://github.com/DevTechMike-Coder/ZeroJs_Blog" target="_blank" rel="noopener noreferrer">GitHub</a></li>
 						<li><a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro Docs</a></li>
 						<li><a href="https://astro.build/chat" target="_blank" rel="noopener noreferrer">Community Discord</a></li>
 					</ul>

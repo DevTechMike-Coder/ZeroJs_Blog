@@ -1,0 +1,130 @@
+---
+interface Props {
+	size?: number;
+	class?: string;
+}
+
+const { size = 24, class: className = '' } = Astro.props;
+---
+
+<span class:list={['icon-wrapper lock-icon-wrap', className]} style={`--icon-size: ${size}px;`}>
+	<svg
+		viewBox="0 0 24 24"
+		width={size}
+		height={size}
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+		class="lock-svg"
+		aria-hidden="true"
+	>
+		<defs>
+			<linearGradient id="lockBodyGrad" x1="4" y1="10" x2="20" y2="22" gradientUnits="userSpaceOnUse">
+				<stop offset="0%" stop-color="#f59e0b" />
+				<stop offset="100%" stop-color="#ea580c" />
+			</linearGradient>
+			<linearGradient id="shackleGrad" x1="7" y1="3" x2="17" y2="10" gradientUnits="userSpaceOnUse">
+				<stop offset="0%" stop-color="#fbbf24" />
+				<stop offset="100%" stop-color="#f59e0b" />
+			</linearGradient>
+			<filter id="lockGlow" x="-20%" y="-20%" width="140%" height="140%">
+				<feGaussianBlur stdDeviation="1.2" result="blur" />
+				<feComposite in="SourceGraphic" in2="blur" operator="over" />
+			</filter>
+		</defs>
+
+		<!-- Shackle -->
+		<path
+			d="M7 10V6.5C7 3.73858 9.23858 1.5 12 1.5C14.7614 1.5 17 3.73858 17 6.5V10"
+			stroke="url(#shackleGrad)"
+			stroke-width="2.5"
+			stroke-linecap="round"
+			class="lock-shackle"
+		/>
+
+		<!-- Body -->
+		<rect
+			x="4"
+			y="9.5"
+			width="16"
+			height="12.5"
+			rx="3"
+			fill="url(#lockBodyGrad)"
+			stroke="rgba(255, 255, 255, 0.3)"
+			stroke-width="0.8"
+			filter="url(#lockGlow)"
+			class="lock-body"
+		/>
+
+		<!-- Keyhole -->
+		<circle cx="12" cy="14.5" r="1.5" fill="#090d16" />
+		<path d="M11.25 15L11.5 18H12.5L12.75 15H11.25Z" fill="#090d16" />
+	</svg>
+</span>
+
+<style>
+	.icon-wrapper {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: var(--icon-size);
+		height: var(--icon-size);
+		line-height: 0;
+	}
+
+	.lock-svg {
+		overflow: visible;
+		display: block;
+	}
+
+	.lock-shackle {
+		transform-origin: 12px 10px;
+		animation: shackle-guard 4s ease-in-out infinite;
+		will-change: transform;
+	}
+
+	.lock-body {
+		transform-origin: center;
+		animation: lock-glow-breathe 4s ease-in-out infinite;
+	}
+
+	.lock-icon-wrap:hover .lock-shackle {
+		animation: lock-protect 0.5s ease-out;
+	}
+
+	@keyframes shackle-guard {
+		0%, 100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-0.8px);
+		}
+	}
+
+	@keyframes lock-glow-breathe {
+		0%, 100% {
+			filter: drop-shadow(0 0 2px rgba(245, 158, 11, 0.3));
+		}
+		50% {
+			filter: drop-shadow(0 0 7px rgba(245, 158, 11, 0.65));
+		}
+	}
+
+	@keyframes lock-protect {
+		0% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(1.2px);
+		}
+		100% {
+			transform: translateY(0);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.lock-shackle,
+		.lock-body {
+			animation: none;
+		}
+	}
+</style>
