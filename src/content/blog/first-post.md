@@ -1,16 +1,62 @@
 ---
-title: 'First post'
-description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 08 2022'
+title: 'The Architecture of Zero JavaScript'
+description: 'How static-first compilation and modern CSS deliver 100/100 Lighthouse performance without sacrificing design.'
+pubDate: 'Oct 10 2026'
 heroImage: '../../assets/blog-placeholder-3.jpg'
+tags: ['Performance', 'Architecture', 'Astro']
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+In the modern web ecosystem, shipping multi-megabyte JavaScript bundles for simple content sites has become an unfortunate default. But do our readers really need to download, parse, and execute Megabytes of client-side JavaScript just to read an essay or browse documentation?
 
-Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa ultricies mi.
+The answer is a resounding **no**.
 
-Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
+## The Real Cost of Client-Side Hydration
 
-Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
+When a browser encounters a client-hydrated framework page, several taxing phases occur in sequence:
 
-Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
+1. **Network Transfer:** Megabytes of minified JavaScript must be downloaded.
+2. **Main Thread Parsing & Compilation:** The CPU parses and compiles the script AST.
+3. **DOM Hydration:** The framework scans the server-rendered HTML and attaches event listeners, often executing redundant component initialization routines.
+
+On high-end workstations with fiber-optic internet, this delay might only be 200ms. But on midrange mobile phones or congested networks, hydration can block the main thread for several seconds — leading to frustrating frozen inputs and jumping layout shifts.
+
+```html
+<!-- The ZeroJS Approach: Clean, semantic HTML -->
+<article class="post-card">
+  <h2>Zero JavaScript Architecture</h2>
+  <p>Rendered once at build time. Cached indefinitely at the edge.</p>
+</article>
+```
+
+## Static-First Compilation with Astro
+
+By utilizing static compilation, pages are generated into pure HTML and CSS during the build step. 
+
+> "The fastest request is the one you don't make; the fastest script is the one you never execute."
+
+When a visitor lands on ZeroJS, the browser receives immediate bytecode that can be painted directly by the browser's rendering engine without waking up the JavaScript V8 runtime.
+
+### Key Benefits
+
+- **Sub-50ms Time to First Byte:** Edge CDNs deliver pre-rendered static assets with minimal TTFB.
+- **Flawless Core Web Vitals:** First Contentful Paint (FCP) and Largest Contentful Paint (LCP) happen nearly in sync.
+- **Resilient Offline & Spotty Network Behavior:** Static HTML documents are easily cached and recover gracefully from packet loss.
+
+## Modern Aesthetics Without JS Bloat
+
+Many developers believe that dynamic, beautiful websites require client-side JavaScript libraries for basic interactions. In truth, modern CSS features like CSS Grid, custom properties, `backdrop-filter`, and CSS transitions allow us to craft stunning, tactile interfaces entirely in CSS:
+
+```css
+.card {
+  background: rgba(17, 23, 38, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+```
+
+By respecting the browser's native capabilities, we can achieve peak performance, lower carbon emissions, and build a more accessible web for all.
