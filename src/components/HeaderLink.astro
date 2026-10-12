@@ -35,4 +35,18 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 		border: 1px solid rgba(99, 102, 241, 0.35);
 		font-weight: 600;
 	}
+
+	@media (max-width: 640px) {
+		a {
+			padding: 0.35rem 0.65rem;
+			font-size: 0.85rem;
+		}
+	}
+
+	@media (max-width: 380px) {
+		a {
+			padding: 0.3rem 0.5rem;
+			font-size: 0.8rem;
+		}
+	}
 </style>

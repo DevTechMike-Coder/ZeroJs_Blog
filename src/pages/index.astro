@@ -465,7 +465,86 @@ const posts = (await getCollection('blog'))
 		.section-header {
 			flex-direction: column;
 			align-items: flex-start;
-			gap: 0.5rem;
+			gap: 0.6rem;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.hero-section {
+			padding: 1.5rem 0 2.5rem;
+		}
+		.hero-badge {
+			font-size: 0.74rem;
+			padding: 0.25rem 0.65rem;
+			text-align: center;
+			max-width: 100%;
+			line-height: 1.4;
+		}
+		.hero-title {
+			font-size: clamp(1.85rem, 6.8vw, 2.5rem);
+			margin-bottom: 1rem;
+		}
+		.hero-description {
+			font-size: 1.02rem;
+			line-height: 1.6;
+			margin-bottom: 1.6rem;
+		}
+		.hero-actions {
+			flex-direction: column;
+			width: 100%;
+			gap: 0.75rem;
+		}
+		.hero-actions .btn {
+			width: 100%;
+		}
+		.metrics-grid {
+			margin-bottom: 3.5rem;
+			gap: 1rem;
+		}
+		.metric-card {
+			padding: 1.4rem 1.2rem;
+		}
+		.metric-value {
+			font-size: 1.9rem;
+		}
+		.articles-section {
+			margin-bottom: 3.5rem;
+		}
+		.article-content {
+			padding: 1.25rem 1.1rem;
+		}
+		.principles-section {
+			margin-bottom: 3.5rem;
+		}
+		.principles-header {
+			margin-bottom: 1.75rem;
+		}
+		.principle-card {
+			padding: 1.5rem 1.25rem;
+		}
+		.cta-banner {
+			padding: 2.25rem 1.25rem;
+			border-radius: var(--radius-md);
+		}
+		.cta-actions {
+			flex-direction: column;
+			width: 100%;
+			gap: 0.75rem;
+		}
+		.cta-actions .btn {
+			width: 100%;
+		}
+	}
+
+	@media (max-width: 380px) {
+		.hero-title {
+			font-size: 1.75rem;
+		}
+		.metric-value {
+			font-size: 1.7rem;
+		}
+		.article-thumb-wrap {
+			height: 160px;
 		}
 	}
 </style>
